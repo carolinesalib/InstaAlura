@@ -26,9 +26,13 @@ export default class App extends Component<Props> {
         data={photos}
         renderItem={ ({item}) =>
           <View>
-            <Text>{item.userName}</Text>
+              <View style={{margin: 10, flexDirection: 'row', alignItems: 'center'}}>
+                  <Image source={require('./resources/img/send.png')}
+                          style={styles.photoHeader} />
+                  <Text>{item.userName}</Text>
+              </View>
             <Image source={require('./resources/img/send.png')}
-                style={{width: width, height: width}} />
+                style={styles.photo} />
           </View>
         }
       />
@@ -47,6 +51,16 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
+  },
+  photoHeader: {
+      marginRight: 10,
+      borderRadius: 20,
+      width: 40,
+      height: 40,
+  },
+  photo: {
+      width: width,
+      height: width,
   },
   instructions: {
     textAlign: 'center',
