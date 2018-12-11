@@ -8,10 +8,10 @@ export default class Post extends Component {
 	  return(
 			<View>
 				<View style={styles.cabecalho}>
-					<Image source={require('../../resources/img/send.png')} style={styles.postHeader} />
+					<Image source={{uri: this.props.photo.urlPerfil}} style={styles.postHeader} />
 					<Text>{this.props.photo.userName}</Text>
 				</View>
-				<Image source={require('../../resources/img/send.png')} style={styles.postPhoto} />
+				<Image source={{uri: this.props.photo.urlFoto}} style={styles.postPhoto} />
 			</View>
 			);
 		}
