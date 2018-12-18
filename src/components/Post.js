@@ -24,6 +24,31 @@ export default class Post extends Component {
 			require('../../resources/img/s2.png')
 	}
 
+	showLikes(likers) {
+		if (likers.length <= 0)
+			return null;
+
+
+		return (
+			<Text style={styles.likes}>
+				{likers.length} {likers.length > 0 ? 'curtidas' : 'curtida'}
+			</Text>
+		);
+	}
+
+	showComment(photo) {
+		if (!photo.comentario) {
+			return null;
+		}
+
+		return (
+			<View style={styles.comment}>
+				<Text style={styles.commentUser}>{photo.loginUsuario}</Text>
+				<Text>{photo.comentario}</Text>
+			</View>
+		);
+	}
+
 	render() {
 		const { photo } = this.state;
 
@@ -39,6 +64,9 @@ export default class Post extends Component {
 						<Image style={styles.likeButton}
 								source={this.updateLikeIcone(photo.liked)}/>
 					</TouchableOpacity>
+
+					{this.showLikes(photo.likers)}
+					{this.showComment(photo)}
 				</View>
 			</View>
 			);
@@ -65,7 +93,17 @@ const styles = StyleSheet.create({
 			margin: 10,
 	},
 	likeButton: {
-			height: 40,
-			width: 40,
+		height: 40,
+		width: 40,
 	},
+	likes: {
+		fontWeight: 'bold'
+	},
+	comment: {
+		flexDirection: 'row'
+	},
+	commentUser: {
+		fontWeight: 'bold',
+		marginRight: 5
+	}
 });
