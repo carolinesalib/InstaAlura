@@ -7,21 +7,38 @@ export default class Post extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-				photo: this.props.photo
+			photo: this.props.photo
 		}
 	}
 
 	like() {
-    const updatedPhoto = {
-        ...this.state.photo,
-        liked: !this.state.photo.liked
-    }
-    this.setState({photo: updatedPhoto});
+		const { photo } = this.state;
+
+		let newList = [];
+
+		if (!photo.liked) {
+			newList = [
+				...photo.likers,
+				{ login: 'myUser' }
+			];
+		} else {
+			newList = photo.likers.filter(liker => {
+				return liker.login !== 'myUser'
+			})
+		}
+
+		const updatedPhoto = {
+			...photo,
+			liked: !photo.liked,
+			likers: newList
+		};
+
+		this.setState({photo: updatedPhoto})
 	}
 
 	updateLikeIcone(liked) {
     return liked ? require('../../resources/img/s2-checked.png') : 
-			require('../../resources/img/s2.png')
+		require('../../resources/img/s2.png')
 	}
 
 	showLikes(likers) {
