@@ -6,7 +6,8 @@ import {
 	View,
 	Image,
 	TouchableOpacity,
-	TextInput
+	TextInput,
+  FlatList
 } from 'react-native';
 
 const width = Dimensions.get('screen').width;
@@ -113,12 +114,16 @@ export default class Post extends Component {
 					{this.showLikes(photo.likers)}
 					{this.showComment(photo)}
 
-          {photo.comentarios.map(comment =>
-            <View style={styles.comment} key={comment.id}>
-              <Text style={styles.commentUser}>{comment.login}</Text>
-              <Text>{comment.texto}</Text>
-            </View>
-          )}
+          <FlatList
+            data={photo.comentarios}
+            keyExtractor={item => item.id}
+            renderItem={ ({item}) =>
+              <View style={styles.comment}>
+                <Text style={styles.commentUser}>{item.login}</Text>
+                <Text>{item.texto}</Text>
+              </View>
+            }
+          />
 
 					<View style={styles.newComment}>
 						<TextInput
