@@ -1,5 +1,13 @@
 import React, {Component} from 'react';
-import {Dimensions, StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
+import {
+	Dimensions,
+	StyleSheet,
+	Text,
+	View,
+	Image,
+	TouchableOpacity,
+	TextInput
+} from 'react-native';
 
 const width = Dimensions.get('screen').width;
 
@@ -84,6 +92,11 @@ export default class Post extends Component {
 
 					{this.showLikes(photo.likers)}
 					{this.showComment(photo)}
+
+					<View style={styles.newComment}>
+						<TextInput style={styles.input} placeholder='Add comment' />
+						<Image style={styles.icon} source={require('../../resources/img/send.png')} />
+					</View>
 				</View>
 			</View>
 			);
@@ -122,5 +135,19 @@ const styles = StyleSheet.create({
 	commentUser: {
 		fontWeight: 'bold',
 		marginRight: 5
+	},
+	input: {
+		height: 40,
+		flex: 1
+	},
+	icon: {
+		height: 30,
+		width: 30
+	},
+	newComment: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		borderBottomWidth: 1,
+		borderBottomColor: '#ddd'
 	}
 });
